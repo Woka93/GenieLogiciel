@@ -26,18 +26,29 @@ public class Grille {
 		
 		for(int i = 0; i < ListeRobot.size(); i++){
 			
-			GrilledeJeu[ListeRobot.get(i).PositionY][ListeRobot.get(i).PositionX] = ListeRobot.get(i);
+			//System.out.println(i);
+			
+			GrilledeJeu[ListeRobot.get(i).PositionY][ListeRobot.get(i).PositionX] = 'R';
 			
 		}
 		
 		for(int i = 0; i < ListeMissile.size(); i++){
 			
-			GrilledeJeu[ListeMissile.get(i).PositionY][ListeMissile.get(i).PositionX] = ListeMissile.get(i);
+			GrilledeJeu[ListeMissile.get(i).PositionY][ListeMissile.get(i).PositionX] = '-';
 			
 		}
 		
 		Affichage(Hauteur, Longueur, GrilledeJeu);
 		
+	}
+	
+	public void GestionTour(List<Missile> ListeMissile, List<Robot> ListeRobot, int Player, Grille Grille){
+		Missile Missile = new Missile(0, 0, false, 'h', 0);
+
+		ListeMissile = Missile.GestionMissile(ListeMissile, Player, Grille);
+		ListeMissile = Missile.VerificationMissileToucheRobot(ListeMissile, ListeRobot);
+		ListeRobot = ListeRobot.get(Player).GestionRobot(ListeRobot);
+		ListeRobot.get(Player).DeUpShield();
 	}
 	
 	/**
@@ -53,7 +64,8 @@ public class Grille {
 			for(int j = 0; j < Longueur; j++){
 				System.out.print(GrilledeJeu[i][j] + "|");
 			}
-			System.out.println();
+			System.out.println("");
 		}
+		System.out.println("=============================");
 	}
 }

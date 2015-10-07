@@ -1,6 +1,5 @@
 package moteur;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Robot extends PionOriente{
@@ -29,77 +28,81 @@ public class Robot extends PionOriente{
 		
 		return ListeRobot;
 	}
-	
-	/**
-	 * Ajout du bouclier pour protéger le robot pendant 1 tour
-	 * @param ListeRobot Liste de tout les Robot sur la grille
-	 * @param Player Pour savoir l'ordre des joueurs
-	 * @return
-	 */
-	public List<Robot> UpShield(List<Robot> ListeRobot, int Player){
+
+	public void UpShield(){
 		
-		ListeRobot.get(Player).Shield = true;
-		ListeRobot.get(Player).Stamina--;
+		this.Shield = true;
+		PerteStamina();
 		
-		return ListeRobot; 
+	}
+
+	public void DeUpShield(){
+		this.Shield = false;
 	}
 	
-	/**
-	 * Si le robot choisit de ne rien faire pendant 1 tour, il régénère 1 point de stamina
-	 * @param ListeRobot 
-	 * @param Player 
-	 * @return
-	 */
-	public List<Robot> RegenStamina(List<Robot> ListeRobot, int Player){
-		
-		ListeRobot.get(Player).Stamina++;
-		
-		return ListeRobot;	
+	public void PerteStamina(){
+		this.Stamina--;
 	}
 	
-	public static List<Robot> VerificationPositionRobot(List<Robot> ListeRobot, int Player, int Hauteur, int Longueur){
+	public void RegenStamina(){
+		this.Stamina++;
+	}
+	
+	public void VerificationPositionRobot(int Hauteur, int Longueur){
 		
-		if(ListeRobot.get(Player).PositionX < 0){
-			ListeRobot.get(Player).PositionX = 0;
-			ListeRobot.get(Player).Stamina--;
-		}else if(ListeRobot.get(Player).PositionX >= Longueur){
-			ListeRobot.get(Player).PositionX = Longueur - 1;
-			ListeRobot.get(Player).Stamina--;
+		if(this.PositionX < 0){
+			this.PositionX = 0;
+		}else if(this.PositionX >= Longueur){
+			this.PositionX = Longueur - 1;
 		}
 		
-		if(ListeRobot.get(Player).PositionY < 0){
-			ListeRobot.get(Player).PositionY = 0;
-			ListeRobot.get(Player).Stamina--;
-		}else if(ListeRobot.get(Player).PositionY >= Hauteur){
-			ListeRobot.get(Player).PositionY = Hauteur - 1;
-			ListeRobot.get(Player).Stamina--;
+		if(this.PositionY < 0){
+			this.PositionY = 0;
+		}else if(this.PositionY >= Hauteur){
+			this.PositionY = Hauteur - 1;
 		}
-		
-		return ListeRobot;
 	}
 	
-	public List<Robot> DeplacementAR(List<Robot> ListeRobot, int Player, int Hauteur, int Longueur){
+	public void DeplacementAR(){
 		
-		switch (ListeRobot.get(Player).Oriente){
+		switch (this.Oriente){
 		//haut
-		case 'h' :
-					ListeRobot.get(Player).PositionY++;
+		case 'h' :	
+					this.PositionY++;
 					break;
 		//droite			
 		case 'd' :	
-					ListeRobot.get(Player).PositionX--;
+					this.PositionX--;
 					break;
 		//bas			
 		case 'b' :
-					ListeRobot.get(Player).PositionY--;
+					this.PositionY--;
 					break;
 		//gauche			
 		case 'g' :	
-					ListeRobot.get(Player).PositionX++;
+					this.PositionX++;
 					break;
 			}
+	}
+	
+	public void MAJ(Grille Grille){
+		VerificationPositionRobot(Grille.Hauteur, Grille.Longueur);
+		PerteStamina();
+	}
+	
+	public List<Robot> GestionRobot(List<Robot> ListeRobot){
+		
+		for(int i = 0; i < ListeRobot.size(); i++){
+			RemoveRobot(ListeRobot, i);
+		}
 		
 		return ListeRobot;
 	}
 	
+	public void RemoveRobot(List<Robot> ListeRobot, int Curseur){
+		
+		if(ListeRobot.get(Curseur).Destructible == true){
+			ListeRobot.remove(Curseur);
+		}	
+	}
 }

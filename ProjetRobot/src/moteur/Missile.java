@@ -20,54 +20,86 @@ public class Missile extends PionOriente{
 	 * @param Longueur
 	 * @return Retourne la nouvelle liste de missile
 	 */
-	public static List<Missile> VerificationPositionMissile(List<Missile> ListeMissile, int Curseur, int Hauteur, int Longueur){
+	public void VerificationPositionMissile(int Curseur, int Hauteur, int Longueur){
 		
-		if(ListeMissile.get(Curseur).PositionX < 0 || ListeMissile.get(Curseur).PositionX >= Longueur){
-			ListeMissile.get(Curseur).Destructible = true;
-		}else if(ListeMissile.get(Curseur).PositionY < 0 || ListeMissile.get(Curseur).PositionY >= Hauteur){
-			ListeMissile.get(Curseur).Destructible = true;
+			if(this.PositionX < 0 || this.PositionX >= Longueur){
+				this.Destructible = true;
+			}else if(this.PositionY < 0 || this.PositionY >= Hauteur){
+				this.Destructible = true;
+			}	
+	}
+	
+	public List<Missile> GestionMissile(List<Missile> ListeMissile, int Player, Grille Grille){
+		
+		for(int i = 0; i < ListeMissile.size(); i++){
+			if(ListeMissile.get(i).PlayerRobot == Player){
+				ListeMissile.get(i).DeplacementAV();
+				ListeMissile.get(i).VerificationPositionMissile(i, Grille.Hauteur, Grille.Longueur);
+			}
+			RemoveMissile(ListeMissile, i);
 		}
+		
 		return ListeMissile;
 	}
 	
-	
-	public List<Missile> LancerMissile(List<Missile> ListeMissile, List<Robot> ListeRobot, int Player){
+	public List<Missile> LancerMissile(List<Missile> ListeMissile,Robot Robot, int Player, Grille Grille){
 		
-		switch (ListeRobot.get(Player).Oriente){
+		Missile Missile;
+		
+		switch (Robot.Oriente){
 		//haut
 		case 'h' :
-					Missile Missileh = new Missile(ListeRobot.get(Player).PositionX, ListeRobot.get(Player).PositionY++, false, ListeRobot.get(Player).Oriente, Player);
-					ListeMissile.add(Missileh);
+					Missile = new Missile(Robot.PositionX, Robot.PositionY+1, false, Robot.Oriente, Player);
+					ListeMissile.add(Missile);
 					break;
 		//droite			
 		case 'd' :	
-					Missile Missiled = new Missile(ListeRobot.get(Player).PositionX--, ListeRobot.get(Player).PositionY, false, ListeRobot.get(Player).Oriente, Player);
-					ListeMissile.add(Missiled);
+					Missile = new Missile(Robot.PositionX+1, Robot.PositionY, false, Robot.Oriente, Player);
+					ListeMissile.add(Missile);
 					break;
 		//bas			
 		case 'b' :
-					Missile Missileb = new Missile(ListeRobot.get(Player).PositionX, ListeRobot.get(Player).PositionY--, false, ListeRobot.get(Player).Oriente, Player);
-					ListeMissile.add(Missileb);
+					Missile = new Missile(Robot.PositionX, Robot.PositionY-1, false, Robot.Oriente, Player);
+					ListeMissile.add(Missile);
 					break;
 		//gauche			
 		case 'g' :	
-					Missile Missileg = new Missile(ListeRobot.get(Player).PositionX++, ListeRobot.get(Player).PositionY, false, ListeRobot.get(Player).Oriente, Player);
-					ListeMissile.add(Missileg);
+					Missile = new Missile(Robot.PositionX-1, Robot.PositionY, false, Robot.Oriente, Player);
+					ListeMissile.add(Missile);
 					break;
 			}
+		
+		ListeMissile.get(ListeMissile.size()-1).PlayerRobot = Player;
+		
+		ListeMissile.get(ListeMissile.size()-1).VerificationPositionMissile(ListeMissile.size()-1, Grille.Hauteur, Grille.Longueur);
+		Robot.PerteStamina();
+		RemoveMissile(ListeMissile, ListeMissile.size()-1);
 		
 		return ListeMissile;
 	}
 	
-	public static List<Missile> VerificationMissileToucheRobot(List<Missile> ListeMissile, List<Robot> ListeRobot, int Curseur){
+	public List<Missile> VerificationMissileToucheRobot(List<Missile> ListeMissile, List<Robot> ListeRobot){
 		
-		for(int i = 0 ; i < ListeRobot.size(); i++){
-			if (ListeMissile.get(Curseur).PositionX == ListeRobot.get(i).PositionX && ListeMissile.get(Curseur).PositionY == ListeRobot.get(i).PositionY){
-				ListeRobot.get(i).Destructible = true;
-				ListeMissile.get(Curseur).Destructible = true;
+		for( int Curseur = 0; Curseur < ListeMissile.size(); Curseur++){
+			for(int i = 0 ; i < ListeRobot.size(); i++){
+				if (ListeMissile.get(Curseur).PositionX == ListeRobot.get(i).PositionX && ListeMissile.get(Curseur).PositionY == ListeRobot.get(i).PositionY){
+					if(ListeRobot.get(i).Shield == false){
+						ListeRobot.get(i).Destructible = true;
+						ListeMissile.get(Curseur).Destructible = true;
+					}else{
+						ListeMissile.get(Curseur).Destructible = true;
+					}
+				} 
+				RemoveMissile(ListeMissile, Curseur);
 			}
 		}
 		return ListeMissile;
 	}
 	
+	public void RemoveMissile(List<Missile> ListeMissile, int Curseur){
+		
+		if(ListeMissile.get(Curseur).Destructible == true){
+			ListeMissile.remove(Curseur);
+		}	
+	}
 }

@@ -1,7 +1,5 @@
 package moteur;
 
-import java.util.List;
-
 public abstract class Pion {
 
 	int PositionX;
@@ -12,14 +10,5 @@ public abstract class Pion {
 		PositionX = pPositionX;
 		PositionY = pPositionY;
 		Destructible = pDestructible;
-	}
-	
-	public List<Pion> RemovePion(List<Pion> Liste, int Curseur){
-		
-		if(Liste.get(Curseur).Destructible == true){
-			Liste.remove(Curseur);
-		}
-		
-		return Liste;	
 	}
 }

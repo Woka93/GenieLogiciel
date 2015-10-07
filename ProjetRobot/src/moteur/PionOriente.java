@@ -1,7 +1,5 @@
 package moteur;
 
-import java.util.List;
-
 public class PionOriente extends Pion{
 
 	char Oriente;
@@ -21,38 +19,29 @@ public class PionOriente extends Pion{
 	 * @param Longueur La longueur de la grille
 	 * @return La liste des robots avec les nouvelles positions
 	 */
-	public List<PionOriente> DeplacementAV(List<PionOriente> Liste, int Curseur){
+	public void DeplacementAV(){
 		
-		switch (Liste.get(Curseur).Oriente){
+		switch (this.Oriente){
 		//haut
 		case 'h' :	
-					Liste.get(Curseur).PositionY--;
+					this.PositionY--;
 					break;
 		
 		//droite			
 		case 'd' :	
-					Liste.get(Curseur).PositionX++;;
+					this.PositionX++;;
 					break;
 		
 		//bas			
 		case 'b' :	
-					Liste.get(Curseur).PositionY++;;
+					this.PositionY++;;
 					break;
 		
 		//gauche			
 		case 'g' :
-					Liste.get(Curseur).PositionX--;;
+					this.PositionX--;;
 					break;
 		}
-		
-		return Liste;
-	}
-	
-	public static List<PionOriente> Destruction(List<PionOriente> ListePion, int Curseur){
-		
-		ListePion.get(Curseur).Destructible = true;
-		
-		return ListePion;
 		
 	}
 }
