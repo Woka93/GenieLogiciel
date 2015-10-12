@@ -22,10 +22,10 @@ public class Missile extends PionOriente{
 	 */
 	public void VerificationPositionMissile(int Curseur, int Hauteur, int Longueur){
 		
-			if(this.PositionX < 0 || this.PositionX >= Longueur){
-				this.Destructible = true;
-			}else if(this.PositionY < 0 || this.PositionY >= Hauteur){
-				this.Destructible = true;
+			if(this.getPositionX() < 0 || this.getPositionX() >= Longueur){
+				this.setDestructible(true);
+			}else if(this.getPositionY() < 0 || this.getPositionY() >= Hauteur){
+				this.setDestructible(true);
 			}	
 	}
 	
@@ -46,25 +46,25 @@ public class Missile extends PionOriente{
 		
 		Missile Missile;
 		
-		switch (Robot.Oriente){
+		switch (Robot.getOriente()){
 		//haut
 		case 'h' :
-					Missile = new Missile(Robot.PositionX, Robot.PositionY+1, false, Robot.Oriente, Player);
+					Missile = new Missile(Robot.getPositionX(), Robot.getPositionY() + 1, false, Robot.getOriente(), Player);
 					ListeMissile.add(Missile);
 					break;
 		//droite			
 		case 'd' :	
-					Missile = new Missile(Robot.PositionX+1, Robot.PositionY, false, Robot.Oriente, Player);
+					Missile = new Missile(Robot.getPositionX() + 1, Robot.getPositionY(), false, Robot.getOriente(), Player);
 					ListeMissile.add(Missile);
 					break;
 		//bas			
 		case 'b' :
-					Missile = new Missile(Robot.PositionX, Robot.PositionY-1, false, Robot.Oriente, Player);
+					Missile = new Missile(Robot.getPositionX(), Robot.getPositionY() - 1, false, Robot.getOriente(), Player);
 					ListeMissile.add(Missile);
 					break;
 		//gauche			
 		case 'g' :	
-					Missile = new Missile(Robot.PositionX-1, Robot.PositionY, false, Robot.Oriente, Player);
+					Missile = new Missile(Robot.getPositionX() - 1, Robot.getPositionY(), false, Robot.getOriente(), Player);
 					ListeMissile.add(Missile);
 					break;
 			}
@@ -82,12 +82,12 @@ public class Missile extends PionOriente{
 		
 		for( int Curseur = 0; Curseur < ListeMissile.size(); Curseur++){
 			for(int i = 0 ; i < ListeRobot.size(); i++){
-				if (ListeMissile.get(Curseur).PositionX == ListeRobot.get(i).PositionX && ListeMissile.get(Curseur).PositionY == ListeRobot.get(i).PositionY){
-					if(ListeRobot.get(i).Shield == false){
-						ListeRobot.get(i).Destructible = true;
-						ListeMissile.get(Curseur).Destructible = true;
+				if (ListeMissile.get(Curseur).getPositionX() == ListeRobot.get(i).getPositionX() && ListeMissile.get(Curseur).getPositionY() == ListeRobot.get(i).getPositionY()){
+					if(!ListeRobot.get(i).isShield()){
+						ListeRobot.get(i).setDestructible(true);
+						ListeMissile.get(Curseur).setDestructible(true);
 					}else{
-						ListeMissile.get(Curseur).Destructible = true;
+						ListeMissile.get(Curseur).setDestructible(true);
 					}
 				} 
 				RemoveMissile(ListeMissile, Curseur);
@@ -98,7 +98,7 @@ public class Missile extends PionOriente{
 	
 	public void RemoveMissile(List<Missile> ListeMissile, int Curseur){
 		
-		if(ListeMissile.get(Curseur).Destructible == true){
+		if(ListeMissile.get(Curseur).isDestructible()){
 			ListeMissile.remove(Curseur);
 		}	
 	}

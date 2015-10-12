@@ -28,13 +28,13 @@ public class Grille {
 			
 			//System.out.println(i);
 			
-			GrilledeJeu[ListeRobot.get(i).PositionY][ListeRobot.get(i).PositionX] = 'R';
+			GrilledeJeu[ListeRobot.get(i).getPositionY()][ListeRobot.get(i).getPositionX()] = 'R';
 			
 		}
 		
 		for(int i = 0; i < ListeMissile.size(); i++){
 			
-			GrilledeJeu[ListeMissile.get(i).PositionY][ListeMissile.get(i).PositionX] = '-';
+			GrilledeJeu[ListeMissile.get(i).getPositionY()][ListeMissile.get(i).getPositionX()] = '-';
 			
 		}
 		
