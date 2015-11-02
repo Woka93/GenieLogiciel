@@ -11,11 +11,15 @@ public class Missile extends PionOriente{
 		
 		PlayerRobot = pPlayerRobot;
 	}
+	
+	public int getPlayerRobot(){
+		return PlayerRobot;
+	}
 
 	/**
 	 * Savoir si un missile sort du plateau
 	 * @param ListeMissile Liste de l'ensemble des missiles sur la grille
-	 * @param Curseur Le numéro du missile dans la liste (Position dans la liste)
+	 * @param Curseur Le numï¿½ro du missile dans la liste (Position dans la liste)
 	 * @param Hauteur
 	 * @param Longueur
 	 * @return Retourne la nouvelle liste de missile

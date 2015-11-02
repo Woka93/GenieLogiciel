@@ -45,10 +45,10 @@ public class Robot extends PionOriente{
 	}
 	
 	/**
-	 * Permet de généraliser la création des robots et ainsi en avoir 2 ou plus sur la grille
+	 * Permet de gï¿½nï¿½raliser la crï¿½ation des robots et ainsi en avoir 2 ou plus sur la grille
 	 * @param Robot
 	 * @param ListeRobot 
-	 * @return La liste des robots compléte 
+	 * @return La liste des robots complï¿½te 
 	 */
 	public List<Robot> AjouterListeRobot(Robot Robot, List<Robot> ListeRobot){
 		
@@ -58,7 +58,7 @@ public class Robot extends PionOriente{
 	}
 	
 	/**
-	 * Méthode qui active le bouclier du robot
+	 * Mï¿½thode qui active le bouclier du robot
 	 */
 	public void UpShield(){
 		
@@ -68,28 +68,28 @@ public class Robot extends PionOriente{
 	}
 	
 	/**
-	 * Méthode pour désactiver le bouclier du robot
+	 * Mï¿½thode pour dï¿½sactiver le bouclier du robot
 	 */
 	public void DeUpShield(){
 		this.Shield = false;
 	}
 	
 	/**
-	 * Méthode pour retirer un point de Stamina
+	 * Mï¿½thode pour retirer un point de Stamina
 	 */
 	public void PerteStamina(){
 		this.Stamina--;
 	}
 	
 	/**
-	 * Méthode pour ajouter un point de Stamina
+	 * Mï¿½thode pour ajouter un point de Stamina
 	 */
 	public void RegenStamina(){
 		this.Stamina++;
 	}
 	
 	/**
-	 * Méthode qui vérifie si  le robot est bien dans la grille
+	 * Mï¿½thode qui vï¿½rifie si  le robot est bien dans la grille
 	 * @param Hauteur
 	 * @param Longueur
 	 */
@@ -131,7 +131,7 @@ public class Robot extends PionOriente{
 	}
 	
 	/**
-	 * Mise à jour du robot (Perte de stamina et verification de position). Effectué à la fin de chaque tour
+	 * Mise ï¿½ jour du robot (Perte de stamina et verification de position). Effectuï¿½ ï¿½ la fin de chaque tour
 	 * @param Grille
 	 */
 	public void MAJ(Grille Grille){

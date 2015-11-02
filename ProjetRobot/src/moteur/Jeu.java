@@ -1,8 +1,10 @@
 package moteur;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
 
 public class Jeu {
 
@@ -33,10 +35,10 @@ public class Jeu {
 			
 		ListeRobot = Initialisation();
 		Grille.RemplirGrille(Grille.Longueur, Grille.Hauteur, ListeRobot, ListeMissile);
-		
+		/*
 		ListeRobot.get(Player).ChangerOrientationRobot(ListeRobot.get(Player), 1); 
 		ListeRobot.get(Player).DeplacementAV();
-		Grille.RemplirGrille(Grille.Longueur, Grille.Hauteur, ListeRobot, ListeMissile);
+		Grille.RemplirGrille(Grille.Longueur, Grille.Hauteur, ListeRobot, ListeMissile);*/
 		
 		/*ListeMissile = Missile.LancerMissile(ListeMissile, ListeRobot.get(Player), Player, Grille);
 		Grille.RemplirGrille(Grille.Longueur, Grille.Hauteur, ListeRobot, ListeMissile);
@@ -49,6 +51,7 @@ public class Jeu {
 		
 		Grille.GestionTour(ListeMissile, ListeRobot, Player, Grille);
 		Grille.RemplirGrille(Grille.Longueur, Grille.Hauteur, ListeRobot, ListeMissile);*/
+		
 	}
 
 

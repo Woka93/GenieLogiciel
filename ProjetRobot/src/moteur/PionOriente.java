@@ -24,7 +24,7 @@ public class PionOriente extends Pion{
 
 	
 	/**
-	 * Permet au robot d'effectuer des déplacements vers l'avant
+	 * Permet au robot d'effectuer des dï¿½placements vers l'avant
 	 * @param ListeRobot
 	 * @param Curseur
 	 * @param Hauteur La hauteur da le grille
