@@ -3,12 +3,13 @@ package plateau;
 import java.awt.GridLayout;
 import java.util.List;
 
+import javax.swing.BoxLayout;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
+
 
 import moteur.Missile;
 import moteur.Robot;
@@ -24,25 +25,31 @@ public class Fenetre extends JFrame {
 	//Déclaration des JPanel
 	private JPanel grilleJeu=new JPanel();
 	private JPanel conteneur=new JPanel();
+	private JPanel interfaceUtilisateur=new JPanel();
 	
 	//Déclaration des boutons
 	private JButton boutonStart=new JButton("Lancer");
 	private JButton boutonPause=new JButton("Pause");
 	
 	//Déclaration des zones de texte
-	private JTextField texte=new JTextField("Zone de texte");
+	//private JTextField texte=new JTextField("Zone de texte");
 	
 	//Déclaration des ComboBox
-	private JComboBox<String> combo=new JComboBox<String>();
+	//private JComboBox<String> combo=new JComboBox<String>();
 	
 	//Déclaration des Labels
 	private JLabel labelRobot1=new JLabel("Robot 1");
+	private JLabel energieRobot1=new JLabel("Energie Robot 1 : 5/5");
+	private JLabel labelRobot2=new JLabel("Robot 2");
+	private JLabel energieRobot2=new JLabel("Energie Robot 2 : 5/5");
 	
 	//Taille du plateau de jeu
 	private int taille=5;
 	
 	//Déclaration du GridLayout
 	GridLayout gridLayout=new GridLayout(taille, taille, 0, 0);
+	BoxLayout boxLayout=new BoxLayout(interfaceUtilisateur, BoxLayout.PAGE_AXIS);
+	
 	
 	
 	
@@ -68,26 +75,32 @@ public class Fenetre extends JFrame {
 
 		//Ajout du panel de la grille
 		conteneur.add(grilleJeu);
+		//Ajout du panel avec les boutons et labels
+		conteneur.add(interfaceUtilisateur);
 		
 		//Ajout du bouton de lancement sur le conteneur
-		conteneur.add(boutonStart);
+		interfaceUtilisateur.add(boutonStart);
 		//Ajout du bouton de pause sur le conteneur
-		conteneur.add(boutonPause);
+		interfaceUtilisateur.add(boutonPause);
 
 		//Ajout d'une zone de texte
-		conteneur.add(texte);
+		//conteneur.add(texte);
 		
 		//Ajout des choix de stratégie du robot 1 dans la combobox
-		combo.addItem("Stratégie offensive");
+		/*combo.addItem("Stratégie offensive");
 		combo.addItem("Stratégie défensive");
 		combo.addItem("Stratégie yolo");
 		//Ajout de la combobox
-		conteneur.add(combo);
+		interfaceUtilisateur.add(combo);*/
 		//ajouter le label du Robot 1
-		conteneur.add(labelRobot1);
+		interfaceUtilisateur.add(labelRobot1);
+		interfaceUtilisateur.add(energieRobot1);
+		interfaceUtilisateur.add(labelRobot2);
+		interfaceUtilisateur.add(energieRobot2);
 		
 		//Affecter le GridLayout au Jlabel grilleJeu
 		grilleJeu.setLayout(gridLayout);
+		interfaceUtilisateur.setLayout(boxLayout);
 		
 		//Tracer la grille vide
 		int i=0;
@@ -115,7 +128,6 @@ public class Fenetre extends JFrame {
 	
 	public void rafraichissement(int taille, List<Robot> ListeRobot, List<Missile> ListeMissile){
 		
-		System.out.println("pop");
 		String[][] liste=new String[taille][taille];
 		int i;
 		int j;
@@ -133,12 +145,13 @@ public class Fenetre extends JFrame {
 		y=ListeRobot.get(0).getPositionY();
 		orientation=ListeRobot.get(0).getOriente();
 		liste[x][y]="robot1"+orientation+".png";
-		System.out.println(ListeRobot.get(0).getPositionX()+ListeRobot.get(0).getPositionY()+ListeRobot.get(0).getOriente());
+		energieRobot1.setText("Energie Robot 1 : "+ListeRobot.get(0).getStamina()+"/5");
 		
 		x=ListeRobot.get(1).getPositionX();
 		y=ListeRobot.get(1).getPositionY();
 		orientation=ListeRobot.get(1).getOriente();
 		liste[x][y]="robot2"+orientation+".png";
+		energieRobot2.setText("Energie Robot 2 : "+ListeRobot.get(1).getStamina()+"/5");
 		
 		//Position des missiles
 		if (ListeMissile.size()!=0){
