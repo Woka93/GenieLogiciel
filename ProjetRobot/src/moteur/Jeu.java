@@ -16,8 +16,9 @@ public class Jeu {
 		
 		StartGame();
 		
-		/*ListeRobot = Robot.DeplacementAR(ListeRobot, Player, Grille.Hauteur, Grille.Longueur); 
-		//ListeMissile = Missile.LancerMissile(ListeMissile, ListeRobot, Player);		
+		/*
+		ListeRobot = Robot.DeplacementAR(ListeRobot, Player, Grille.Hauteur, Grille.Longueur); 
+		ListeMissile = Missile.LancerMissile(ListeMissile, ListeRobot, Player);		
 		Grille.RemplirGrille(Grille.Longueur, Grille.Hauteur, ListeRobot, ListeMissile);
 		
 		System.out.println(ListeRobot.get(0).PositionX);*/
@@ -38,16 +39,17 @@ public class Jeu {
 		/*
 		ListeRobot.get(Player).ChangerOrientationRobot(ListeRobot.get(Player), 1); 
 		ListeRobot.get(Player).DeplacementAV();
-		Grille.RemplirGrille(Grille.Longueur, Grille.Hauteur, ListeRobot, ListeMissile);*/
-		
-		/*ListeMissile = Missile.LancerMissile(ListeMissile, ListeRobot.get(Player), Player, Grille);
 		Grille.RemplirGrille(Grille.Longueur, Grille.Hauteur, ListeRobot, ListeMissile);
+		*/
+		
+		ListeMissile = Missile.LancerMissile(ListeMissile, ListeRobot.get(Player), Player, Grille);
+		Grille.RemplirGrille(Grille.Longueur, Grille.Hauteur, ListeRobot, ListeMissile);/*
 		
 		ListeRobot.get(1).UpShield();
 		Grille.GestionTour(ListeMissile, ListeRobot, 1, Grille);
-
+*/
 		Grille.GestionTour(ListeMissile, ListeRobot, Player, Grille);
-		Grille.RemplirGrille(Grille.Longueur, Grille.Hauteur, ListeRobot, ListeMissile);
+		Grille.RemplirGrille(Grille.Longueur, Grille.Hauteur, ListeRobot, ListeMissile);/*
 		
 		Grille.GestionTour(ListeMissile, ListeRobot, Player, Grille);
 		Grille.RemplirGrille(Grille.Longueur, Grille.Hauteur, ListeRobot, ListeMissile);*/

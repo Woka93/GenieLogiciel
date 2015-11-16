@@ -156,7 +156,7 @@ public class Fenetre extends JFrame {
 		//Position des missiles
 		if (ListeMissile.size()!=0){
 			
-		for(int k=0;k<ListeMissile.size(); k++){
+		for(int k=0;k<ListeMissile.size(); k++){			
 				x=ListeMissile.get(k).getPositionX();
 				y=ListeMissile.get(k).getPositionY();
 				orientation=ListeMissile.get(k).getOriente();

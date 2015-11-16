@@ -53,22 +53,22 @@ public class Missile extends PionOriente{
 		switch (Robot.getOriente()){
 		//haut
 		case 'h' :
-					Missile = new Missile(Robot.getPositionX(), Robot.getPositionY() + 1, false, Robot.getOriente(), Player);
+					Missile = new Missile(Robot.getPositionX(), Robot.getPositionY(), false, Robot.getOriente(), Player);
 					ListeMissile.add(Missile);
 					break;
 		//droite			
 		case 'd' :	
-					Missile = new Missile(Robot.getPositionX() + 1, Robot.getPositionY(), false, Robot.getOriente(), Player);
+					Missile = new Missile(Robot.getPositionX() , Robot.getPositionY(), false, Robot.getOriente(), Player);
 					ListeMissile.add(Missile);
 					break;
 		//bas			
 		case 'b' :
-					Missile = new Missile(Robot.getPositionX(), Robot.getPositionY() - 1, false, Robot.getOriente(), Player);
+					Missile = new Missile(Robot.getPositionX(), Robot.getPositionY(), false, Robot.getOriente(), Player);
 					ListeMissile.add(Missile);
 					break;
 		//gauche			
 		case 'g' :	
-					Missile = new Missile(Robot.getPositionX() - 1, Robot.getPositionY(), false, Robot.getOriente(), Player);
+					Missile = new Missile(Robot.getPositionX() , Robot.getPositionY(), false, Robot.getOriente(), Player);
 					ListeMissile.add(Missile);
 					break;
 			}
@@ -78,7 +78,6 @@ public class Missile extends PionOriente{
 		ListeMissile.get(ListeMissile.size()-1).VerificationPositionMissile(ListeMissile.size()-1, Grille.Hauteur, Grille.Longueur);
 		Robot.PerteStamina();
 		RemoveMissile(ListeMissile, ListeMissile.size()-1);
-		
 		return ListeMissile;
 	}
 	

@@ -36,22 +36,22 @@ public class PionOriente extends Pion{
 		switch (this.Oriente){
 		//haut
 		case 'h' :	
-					this.setPositionY(getPositionY() - 1);
+					this.setPositionX(getPositionX() - 1);
 					break;
 		
 		//droite			
 		case 'd' :	
-					this.setPositionX(getPositionX() + 1);;
+					this.setPositionY(getPositionY() + 1);
 					break;
 		
 		//bas			
 		case 'b' :	
-					this.setPositionY(getPositionY() + 1);
+					this.setPositionX(getPositionX() + 1);
 					break;
 		
 		//gauche			
 		case 'g' :
-					this.setPositionX(getPositionX() - 1);
+					this.setPositionY(getPositionY() - 1);
 					break;
 		}
 		
