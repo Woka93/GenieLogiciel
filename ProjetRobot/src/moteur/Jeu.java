@@ -2,13 +2,18 @@ package moteur;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
+import ia.*;
 
 
 public class Jeu {
+	
+	
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		// TODO Auto-generated method stub
 		
 		//Robot Robot = new Robot(0, 0, false, 'h', 0, 0, false);
@@ -25,34 +30,40 @@ public class Jeu {
 	}
 	
 	
-	private static void StartGame() {
+	private static void StartGame() throws InterruptedException {
+		
+		int taille=5;
 
 		List<Missile> ListeMissile = new ArrayList<Missile>();
 		List<Robot> ListeRobot = new ArrayList<Robot>();
 		Grille Grille = new Grille(5, 5);
-		Missile Missile = new Missile(0, 0, false, 'h', 0);
 		
 		int Player = 0;
 			
 		ListeRobot = Initialisation();
-		Grille.RemplirGrille(Grille.Longueur, Grille.Hauteur, ListeRobot, ListeMissile);
-		/*
-		ListeRobot.get(Player).ChangerOrientationRobot(ListeRobot.get(Player), 1); 
-		ListeRobot.get(Player).DeplacementAV();
-		Grille.RemplirGrille(Grille.Longueur, Grille.Hauteur, ListeRobot, ListeMissile);
-		*/
+		Grille.RemplirGrille(taille, taille, ListeRobot, ListeMissile);
 		
-		ListeMissile = Missile.LancerMissile(ListeMissile, ListeRobot.get(Player), Player, Grille);
-		Grille.RemplirGrille(Grille.Longueur, Grille.Hauteur, ListeRobot, ListeMissile);/*
+		TestDeplacementRobot tdr1 = new TestDeplacementRobot(Player);
+		Player = Player + 1;
+		TestDeplacementRobot tdr2 = new TestDeplacementRobot(Player);
 		
-		ListeRobot.get(1).UpShield();
-		Grille.GestionTour(ListeMissile, ListeRobot, 1, Grille);
-*/
-		Grille.GestionTour(ListeMissile, ListeRobot, Player, Grille);
-		Grille.RemplirGrille(Grille.Longueur, Grille.Hauteur, ListeRobot, ListeMissile);/*
+		int i = 0;
+		while (i < 5) {
+			System.out.println("Tour J1");
+			Player = 0;
+			ListeMissile = tdr1.JouerIA(ListeRobot, ListeMissile, Grille);
+			Grille.GestionTour(ListeMissile, ListeRobot, Player, Grille);
+			Grille.RemplirGrille(taille, taille, ListeRobot, ListeMissile);
+
+			System.out.println("Tour J2");
+			Player = 1;
+			ListeMissile = tdr2.JouerIA(ListeRobot, ListeMissile, Grille);
+			Grille.GestionTour(ListeMissile, ListeRobot, Player, Grille);
+			Grille.RemplirGrille(taille, taille, ListeRobot, ListeMissile);
+			i++;
+			Thread.sleep(2000);
+		}
 		
-		Grille.GestionTour(ListeMissile, ListeRobot, Player, Grille);
-		Grille.RemplirGrille(Grille.Longueur, Grille.Hauteur, ListeRobot, ListeMissile);*/
 		
 	}
 
@@ -97,4 +108,7 @@ public class Jeu {
 		//sc.close();
 		return ListeRobot;
 	}
+	
+	
+
 }
