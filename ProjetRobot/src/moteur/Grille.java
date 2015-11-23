@@ -42,9 +42,11 @@ public class Grille {
 	public void GestionTour(List<Missile> ListeMissile, List<Robot> ListeRobot, int Player, Grille Grille){
 		Missile Missile = new Missile(0, 0, false, 'h', 0);
 
+
 		ListeMissile = Missile.GestionMissile(ListeMissile, Player, Grille);
 		ListeMissile = Missile.VerificationMissileToucheRobot(ListeMissile, ListeRobot);
 		ListeRobot = ListeRobot.get(Player).GestionRobot(ListeRobot);
 		ListeRobot.get(Player).DeUpShield();
+		
 	}
 }

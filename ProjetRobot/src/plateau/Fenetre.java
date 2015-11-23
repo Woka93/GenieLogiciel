@@ -38,10 +38,7 @@ public class Fenetre extends JFrame {
 	//private JComboBox<String> combo=new JComboBox<String>();
 	
 	//Déclaration des Labels
-	private JLabel labelRobot1=new JLabel("Robot 1");
-	private JLabel energieRobot1=new JLabel("Energie Robot 1 : 5/5");
-	private JLabel labelRobot2=new JLabel("Robot 2");
-	private JLabel energieRobot2=new JLabel("Energie Robot 2 : 5/5");
+	private JLabel energieRobot1=new JLabel("");
 	
 	//Taille du plateau de jeu
 	private int taille=5;
@@ -93,10 +90,8 @@ public class Fenetre extends JFrame {
 		//Ajout de la combobox
 		interfaceUtilisateur.add(combo);*/
 		//ajouter le label du Robot 1
-		interfaceUtilisateur.add(labelRobot1);
 		interfaceUtilisateur.add(energieRobot1);
-		interfaceUtilisateur.add(labelRobot2);
-		interfaceUtilisateur.add(energieRobot2);
+
 		
 		//Affecter le GridLayout au Jlabel grilleJeu
 		grilleJeu.setLayout(gridLayout);
@@ -136,22 +131,22 @@ public class Fenetre extends JFrame {
 				liste[i][j]="carre.png";
 			}
 		}
+		String energies="<html>";
 
 		//Position des robots
 		int x;
 		int y;
 		char orientation;
-		x=ListeRobot.get(0).getPositionX();
-		y=ListeRobot.get(0).getPositionY();
-		orientation=ListeRobot.get(0).getOriente();
-		liste[x][y]="robot1"+orientation+".png";
-		energieRobot1.setText("Energie Robot 1 : "+ListeRobot.get(0).getStamina()+"/5");
-		
-		x=ListeRobot.get(1).getPositionX();
-		y=ListeRobot.get(1).getPositionY();
-		orientation=ListeRobot.get(1).getOriente();
-		liste[x][y]="robot2"+orientation+".png";
-		energieRobot2.setText("Energie Robot 2 : "+ListeRobot.get(1).getStamina()+"/5");
+		for(int l=0; l<ListeRobot.size();l++){
+		x=ListeRobot.get(l).getPositionX();
+		y=ListeRobot.get(l).getPositionY();
+		orientation=ListeRobot.get(l).getOriente();
+		liste[x][y]="robot"+(l%2+1)+orientation+".png";	
+		energies=energies+"Energie Robot "+(l+1)+" : "+ListeRobot.get(l).getStamina()+"/5 <br>";
+		}
+		energies=energies+"</html>";
+		energieRobot1.setText(energies);
+		//energieRobot2.setText("Energie Robot 2 : "+ListeRobot.get(1).getStamina()+"/5");
 		
 		//Position des missiles
 		if (ListeMissile.size()!=0){
@@ -160,7 +155,7 @@ public class Fenetre extends JFrame {
 				x=ListeMissile.get(k).getPositionX();
 				y=ListeMissile.get(k).getPositionY();
 				orientation=ListeMissile.get(k).getOriente();
-				if(ListeMissile.get(k).getPlayerRobot()==0){
+				if(ListeMissile.get(k).getPlayerRobot()%2==0){
 					liste[x][y]="Missile1"+orientation+".png";
 				}
 				else{
