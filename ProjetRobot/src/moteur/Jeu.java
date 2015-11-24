@@ -2,9 +2,7 @@ package moteur;
 
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 import ia.*;
 
@@ -32,39 +30,69 @@ public class Jeu {
 	
 	private static void StartGame() throws InterruptedException {
 		
-		int taille=5;
+		int taille = 5;
 
 		List<Missile> ListeMissile = new ArrayList<Missile>();
 		List<Robot> ListeRobot = new ArrayList<Robot>();
-		Grille Grille = new Grille(5, 5);
+		Grille Grille = new Grille(taille, taille);
 		
 		int Player = 0;
 			
 		ListeRobot = Initialisation();
-		Grille.RemplirGrille(taille, taille, ListeRobot, ListeMissile);
+		Grille.RemplirGrille(ListeRobot, ListeMissile);
 		
+		/**
+		 * Stratégie pas trop bête
+		 */
 		TestDeplacementRobot tdr1 = new TestDeplacementRobot(Player);
 		Player = Player + 1;
 		TestDeplacementRobot tdr2 = new TestDeplacementRobot(Player);
 		
 		int i = 0;
-		while (i < 5) {
+		while (i < 10) {
 			System.out.println("Tour J1");
 			Player = 0;
 			ListeMissile = tdr1.JouerIA(ListeRobot, ListeMissile, Grille);
 			Grille.GestionTour(ListeMissile, ListeRobot, Player, Grille);
-			Grille.RemplirGrille(taille, taille, ListeRobot, ListeMissile);
-
+			Grille.RemplirGrille(ListeRobot, ListeMissile);
+			Thread.sleep(500);
+			
 			System.out.println("Tour J2");
 			Player = 1;
 			ListeMissile = tdr2.JouerIA(ListeRobot, ListeMissile, Grille);
 			Grille.GestionTour(ListeMissile, ListeRobot, Player, Grille);
-			Grille.RemplirGrille(taille, taille, ListeRobot, ListeMissile);
+			Grille.RemplirGrille(ListeRobot, ListeMissile);
 			i++;
-			Thread.sleep(2000);
+			Thread.sleep(500);
 		}
 		
+		//==========================================================================
 		
+		/**
+		 * Stratégie aléatoire
+		 */
+		/*StrategieAbstraite stratJ1 = new StrategieRandom();
+		Probleme problemeJ1 = new Probleme(Player, stratJ1);
+		StrategieAbstraite stratJ2 = new StrategieRandom();
+		Probleme problemeJ2 = new Probleme((Player+1), stratJ2);
+		
+		int i = 0;
+		while (i < 10) {
+			System.out.println("Tour J1");
+			Player = 0;
+			ListeMissile = problemeJ1.Jouer(ListeMissile, ListeRobot, Grille);
+			Grille.GestionTour(ListeMissile, ListeRobot, Player, Grille);
+			Grille.RemplirGrille(ListeRobot, ListeMissile);
+			Thread.sleep(500);
+			
+			System.out.println("Tour J2");
+			Player = 1;
+			ListeMissile = problemeJ2.Jouer(ListeMissile, ListeRobot, Grille);
+			Grille.GestionTour(ListeMissile, ListeRobot, Player, Grille);
+			Grille.RemplirGrille(ListeRobot, ListeMissile);
+			i++;
+			Thread.sleep(500);
+		}*/
 	}
 
 

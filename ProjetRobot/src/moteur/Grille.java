@@ -22,7 +22,7 @@ public class Grille {
 		
 		Longueur = pLongueur;
 		Hauteur = pHauteur;
-		this.lancementVue();
+		Grille.lancementVue();
 		
 	}
 	
@@ -32,7 +32,7 @@ public class Grille {
 	 * @param Hauteur
 	 * @param ListeRobot
 	 */
-	public void RemplirGrille(int Longueur, int Hauteur, List<Robot> ListeRobot, List<Missile> ListeMissile){
+	public void RemplirGrille(List<Robot> ListeRobot, List<Missile> ListeMissile){
 		
 		
 		fenetreJeu.rafraichissement(Hauteur, ListeRobot, ListeMissile);

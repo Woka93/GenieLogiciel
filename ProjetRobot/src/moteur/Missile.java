@@ -46,7 +46,7 @@ public class Missile extends PionOriente{
 		return ListeMissile;
 	}
 	
-	public List<Missile> LancerMissile(List<Missile> ListeMissile,Robot Robot, int Player, Grille Grille){
+	public static List<Missile> LancerMissile(List<Missile> ListeMissile,Robot Robot, int Player, Grille Grille){
 		
 		Missile Missile;
 		
@@ -99,7 +99,7 @@ public class Missile extends PionOriente{
 		return ListeMissile;
 	}
 	
-	public void RemoveMissile(List<Missile> ListeMissile, int Curseur){
+	public static void RemoveMissile(List<Missile> ListeMissile, int Curseur){
 		
 		if(ListeMissile.get(Curseur).isDestructible()){
 			ListeMissile.remove(Curseur);

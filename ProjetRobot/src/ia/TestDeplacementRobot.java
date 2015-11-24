@@ -67,14 +67,14 @@ public class TestDeplacementRobot {
 		if(this.player1.getStamina() == 0) {
 			// Regen Stamina
 			player1.RegenStamina();
-		} else if ((m = calcul.Danger(player, player1, ListeMissile)) != -1) {
+		} else if ((m = calcul.Danger(player, ListeMissile)) != -1) {
 			GestionDanger(m);
 		} else if (action_memo > 0) {
 			GestionActionMemo();
-		} else if (!calcul.Aligner(player1, player2)){
-			GestionDeplacement(player, this.ListeRobot.get(player), this.player2);
+		} else if (!calcul.Aligner()){
+			GestionDeplacement();
 		} else if (!calcul.estOrienteVersPion(player1, player2)){
-			calcul.OrienteVersPion(player1, player2);
+			calcul.OrienteVersPion();
 		} else {
 			ListeMissile = lancerMissile(ListeMissile, player1, player, grille);
 			action_memo = 1;
@@ -93,8 +93,7 @@ public class TestDeplacementRobot {
 
 	private List<Missile> lancerMissile (List<Missile> ListeMissile, Robot player1, int player, Grille grille) {
 		
-		Missile missile = new Missile (0,0,false,'h',0);
-		ListeMissile = missile.LancerMissile(ListeMissile, player1, player, grille);
+		ListeMissile = Missile.LancerMissile(ListeMissile, player1, player, grille);
 		
 		return ListeMissile;
 	}
@@ -114,12 +113,12 @@ public class TestDeplacementRobot {
 		action_memo = 0;
 	}
 	
-	private void GestionDeplacement(int player, Robot player1, Robot player2) {
+	private void GestionDeplacement() {
 			
-		if (calcul.ProcheLignesouColonnes(player1, player2)) {
-			calcul.OrienteVersLignes(player1, player2);
+		if (calcul.ProcheLignesouColonnes()) {
+			calcul.OrienteVersLignes();
 		} else {
-			calcul.OrienteVersColonnes(player1, player2);
+			calcul.OrienteVersColonnes();
 		}
 	}
 }

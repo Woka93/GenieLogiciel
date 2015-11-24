@@ -5,12 +5,16 @@ import java.util.List;
 import moteur.*;
 
 public class Calcul {
+	
+	protected Robot player1;
+	protected Robot player2;
 
-	public Calcul (List<Missile> ListeMissile, Robot player1, Robot player2) {
-		
+	protected Calcul (List<Missile> ListeMissile, Robot player1, Robot player2) {
+		this.player1 = player1;
+		this.player2 = player2;
 	}
 	
-	public boolean Aligner(Robot player1, Robot player2) {
+	protected boolean Aligner() {
 		
 		if (player1.getPositionY() == player2.getPositionY() || player1.getPositionX() == player2.getPositionX()) {
 			return true;
@@ -18,7 +22,7 @@ public class Calcul {
 		return false;
 	}
 	
-	public boolean estOrienteVersPion (PionOriente pion1, PionOriente pion2) {
+	protected boolean estOrienteVersPion (PionOriente pion1, PionOriente pion2) {
 		
 		boolean oriente = false;
 		
@@ -37,7 +41,7 @@ public class Calcul {
 		return oriente;
 	}
 
-	public int Danger (int player, Robot player1, List<Missile> ListeMissile) {
+	protected int Danger (int player, List<Missile> ListeMissile) {
 		
 		//int dist = 0;
 		
@@ -63,7 +67,7 @@ public class Calcul {
 		return -1;
 	}
 	
-	public char OpposeOriente (char oriente) {
+	protected char OpposeOriente (char oriente) {
 		
 		final char TabOrientation[] = {'h','d','b','g'};
 		
@@ -75,7 +79,7 @@ public class Calcul {
 		return oriente;
 	}
 	
-	public boolean ProcheLignesouColonnes (Robot player1, Robot player2) {
+	protected boolean ProcheLignesouColonnes() {
 		
 		if (Math.abs(player1.getPositionY()-player2.getPositionY()) > Math.abs(player1.getPositionY()-player2.getPositionY())) {
 			return true; 		// proche des lignes
@@ -87,7 +91,7 @@ public class Calcul {
 		return false;			// proche des colonnes
 	}
 	
-	public void OrienteVersLignes (Robot player1, Robot player2) {
+	protected void OrienteVersLignes() {
 		
 		switch(player1.getOriente()) {
 		case 'g' :
@@ -108,7 +112,7 @@ public class Calcul {
 		}
 	}
 	
-	public void OrienteVersColonnes (Robot player1, Robot player2) {
+	protected void OrienteVersColonnes() {
 		
 		switch(player1.getOriente()) {
 		case 'h' :
@@ -129,7 +133,7 @@ public class Calcul {
 		}
 	}
 	
-	public int DirectiondeEnnemi (Robot player1, Robot player2) {
+	protected int DirectiondeEnnemi (Robot player1, Robot player2) {
 		
 		if (player1.getPositionX() > player2.getPositionX()) {
 			return 0; //haut
@@ -146,7 +150,7 @@ public class Calcul {
 		return -1;
 	}
 
-	public void OrienteVersPion(Robot player1, Robot player2) {
+	protected void OrienteVersPion() {
 		
 		switch(DirectiondeEnnemi(player1, player2)) {
 		case 0 : 	if (player1.getOriente() == 'g') {player1.ChangerOrientationRobot(player1, 1);}
